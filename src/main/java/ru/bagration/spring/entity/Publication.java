@@ -1,16 +1,16 @@
 package ru.bagration.spring.entity;
 
-
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
 
-@Entity
 @Getter
 @Setter
 @ToString
+@Entity
 @Table(name = "publications")
 public class Publication {
 
@@ -26,7 +26,7 @@ public class Publication {
     private String publicId;
 
     @Column(name = "author_id")
-    public Long authorId;
+    private Long authorId;
 
     @Column(name = "title")
     private String title;

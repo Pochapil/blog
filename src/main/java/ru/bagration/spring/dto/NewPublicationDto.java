@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class NewPublicationDto {
-
     @NotNull
     @NotEmpty
     @NotBlank
@@ -25,5 +24,4 @@ public class NewPublicationDto {
     @NotEmpty
     @NotBlank
     private String content;
-
 }

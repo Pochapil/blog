@@ -6,10 +6,10 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-@Entity
 @Getter
 @Setter
 @ToString
+@Entity
 @Table(name = "authors")
 public class Author {
 
@@ -27,7 +27,7 @@ public class Author {
     @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "second_name")
-    private String secondName;
+    @Column(name = "last_name")
+    private String lastName;
 
 }

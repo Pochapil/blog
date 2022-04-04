@@ -34,5 +34,4 @@ public interface PublicationRepository extends JpaRepository<Publication, Long>,
     @Query("select p.id from Publication p where p.publicId=:publicId")
     Long getIdByPublicId(String publicId);
 
-
 }

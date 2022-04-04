@@ -1,6 +1,5 @@
 package ru.bagration.spring.dto;
 
-
 import lombok.Data;
 
 import java.util.Map;
@@ -9,7 +8,7 @@ import java.util.Map;
 public class AuthorDto {
     private String id;
     private String firstName;
-    private String secondName;
+    private String lastName;
     private Long numberOfPublications;
-    private Map<String,Long> perTheme;
+    private Map<String, Long> perTheme;
 }

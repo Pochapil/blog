@@ -16,5 +16,5 @@ public class CreateAuthorDto {
     @NotNull
     @NotEmpty
     @NotBlank
-    private String secondName;
+    private String lastName;
 }

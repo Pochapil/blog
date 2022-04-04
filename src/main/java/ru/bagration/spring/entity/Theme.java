@@ -4,8 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Entity
 @Data
+@Entity
 @Table(name = "themes")
 public class Theme {
 

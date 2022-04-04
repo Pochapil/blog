@@ -1,15 +1,14 @@
 package ru.bagration.spring.dto;
 
-
 import lombok.Data;
 
 @Data
 public class PublicationDto {
-
     private String id;
-    private Long authorId;
+    private String author;
+    private String authorId;
     private String title;
-    private Long themeId;
+    private String theme;
+    private String themeId;
     private String content;
-
 }
