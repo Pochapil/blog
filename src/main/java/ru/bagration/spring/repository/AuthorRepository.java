@@ -27,7 +27,7 @@ public interface AuthorRepository extends JpaRepository<Author, Long>, JpaSpecif
 
     boolean existsByFirstNameIgnoreCase(String firstName);
 
-    boolean existsBySecondNameIgnoreCase(String secondName);
+    boolean existsByLastNameIgnoreCase(String lastName);
 
     boolean existsByFirstNameIgnoreCaseOrLastNameIgnoreCase(String firstName, String lastName);
 
