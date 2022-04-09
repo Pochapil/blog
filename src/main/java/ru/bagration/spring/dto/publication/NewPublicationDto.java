@@ -8,20 +8,20 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class NewPublicationDto {
-    @NotNull
-    @NotEmpty
-    @NotBlank
+    @NotNull(message = "publication.authorId.require.not.null")
+    @NotEmpty(message = "publication.authorId.require.not.empty")
+    @NotBlank(message = "publication.authorId.require.not.blank")
     private String authorId;
-    @NotNull
-    @NotEmpty
-    @NotBlank
+    @NotNull(message = "publication.themeId.require.not.null")
+    @NotEmpty(message = "publication.themeId.require.not.empty")
+    @NotBlank(message = "publication.themeId.require.not.blank")
     private String themeId;
     @NotNull(message = "publication.title.require.not.null")
     @NotEmpty(message = "publication.title.require.not.empty")
     @NotBlank(message = "publication.title.require.not.blank")
     private String title;
-    @NotNull
-    @NotEmpty
-    @NotBlank
+    @NotNull(message = "publication.content.require.not.null")
+    @NotEmpty(message = "publication.content.require.not.empty")
+    @NotBlank(message = "publication.content.require.not.blank")
     private String content;
 }
