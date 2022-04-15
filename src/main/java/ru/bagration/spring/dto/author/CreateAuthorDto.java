@@ -9,12 +9,12 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class CreateAuthorDto {
-    @NotNull
-    @NotEmpty
-    @NotBlank
+    @NotNull(message = "author.firstName.require.not.null")
+    @NotEmpty(message = "author.firstName.require.not.empty")
+    @NotBlank(message = "author.firstName.require.not.blank")
     private String firstName;
-    @NotNull
-    @NotEmpty
-    @NotBlank
+    @NotNull(message = "author.lastName.require.not.null")
+    @NotEmpty(message = "author.lastName.require.not.empty")
+    @NotBlank(message = "author.lastName.require.not.blank")
     private String lastName;
 }

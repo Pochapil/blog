@@ -19,40 +19,39 @@ public class BlogApplication {
         var error_message_rep = context.getBean(ErrorMessageRepository.class);
 
         /*var error_message1 = new ErrorMessage();
-        error_message1.setKey("publication.content.require.not.null");
-        error_message1.setValue("В статье должно быть содержание");
+        error_message1.setKey("theme.name.require.not.null");
+        error_message1.setValue("У темы должно быть название");
         error_message1.setLang("ru");
 
         var error_message2 = new ErrorMessage();
-        error_message2.setKey("publication.content.require.not.empty");
-        error_message2.setValue("Содержание статьи не может быть пустой строкой");
+        error_message2.setKey("theme.name.require.not.empty");
+        error_message2.setValue("Название темы не может быть пустой строкой");
         error_message2.setLang("ru");
 
         var error_message3 = new ErrorMessage();
-        error_message3.setKey("publication.content.require.not.blank");
-        error_message3.setValue("Содержание статьи не может быть пустыми пробелами");
+        error_message3.setKey("theme.name.require.not.blank");
+        error_message3.setValue("Название темы не может быть пустыми пробелами");
         error_message3.setLang("ru");*/
 
 
-        var error_message1 = new ErrorMessage();
-        error_message1.setKey("publication.content.require.not.null");
-        error_message1.setValue("Article must have a content");
+        /*var error_message1 = new ErrorMessage();
+        error_message1.setKey("theme.name.require.not.null");
+        error_message1.setValue("Theme must have a name");
         error_message1.setLang("en");
 
         var error_message2 = new ErrorMessage();
-        error_message2.setKey("publication.content.require.not.empty");
-        error_message2.setValue("Publication title shouldn't be empty");
+        error_message2.setKey("theme.name.require.not.empty");
+        error_message2.setValue("Theme name shouldn't be empty");
         error_message2.setLang("en");
 
         var error_message3 = new ErrorMessage();
-        error_message3.setKey("publication.content.require.not.blank");
-        error_message3.setValue("Publication content shouldn't be empty spaces");
-        error_message3.setLang("en");
+        error_message3.setKey("theme.name.require.not.blank");
+        error_message3.setValue("Theme name shouldn't be empty spaces");
+        error_message3.setLang("en");*/
 
-
-        error_message_rep.save(error_message1);
+        /*error_message_rep.save(error_message1);
         error_message_rep.save(error_message2);
-        error_message_rep.save(error_message3);
+        error_message_rep.save(error_message3);*/
 
     }
 
