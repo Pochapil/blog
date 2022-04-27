@@ -1,7 +1,11 @@
 package ru.bagration.spring.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -15,6 +19,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 
 @RequiredArgsConstructor
@@ -42,9 +47,21 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
                                             Authentication authentication) throws IOException {
-        String username =((User)authentication.getPrincipal()).getUsername();
+
+        String username = ((User) authentication.getPrincipal()).getUsername();
+        var userDetails = applicationUserService.loadUserByUsername(username);
+
+        String token = Jwts.builder().setIssuer("blog-service")
+                .claim("username", username)
+                .claim("authorities", userDetails.getAuthorities())
+                .setExpiration(new Date(System.currentTimeMillis() + SecurityUtils.expiration))
+                .signWith(SignatureAlgorithm.ES512, SecurityUtils.secretKey)
+                .compact();
+
         var map = new HashMap<String, String>();
-        map.put("message","success");
+        map.put("message", "success");
+        map.put("token", SecurityUtils.tokenPrefix + token);
+        response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString());
         response.getWriter().write(new ObjectMapper().writeValueAsString(map));
     }
 

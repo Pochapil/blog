@@ -26,7 +26,7 @@ public class ApplicationUserServiceImplementation implements ApplicationUserServ
 
         var userOptional = applicationUserRepository.findApplicationUserByUsername(username);
 
-        if (username.isEmpty()){
+        if (username.isEmpty()) {
             throw new UsernameNotFoundException("unauthorized");
         }
 
@@ -34,15 +34,15 @@ public class ApplicationUserServiceImplementation implements ApplicationUserServ
 
         var userAuthorities = userAuthorityRepository.findAllByUserId(user.getId());
         var grantedAuthorities = new ArrayList<SimpleGrantedAuthority>();
-        for (var userAuthority: userAuthorities ){
+        for (var userAuthority : userAuthorities) {
             var authorityOptional = authorityRepository.findById(userAuthority.getAuthorityId());
-            if(authorityOptional.isPresent()) {
+            if (authorityOptional.isPresent()) {
                 grantedAuthorities.add(new SimpleGrantedAuthority(authorityOptional.get().getAuthority()));
             }
 
         }
 
-        var userDetails= new UserDetailsImplementation();
+        var userDetails = new UserDetailsImplementation();
         userDetails.setUsername(user.getUsername());
         userDetails.setPassword(user.getPassword());
         userDetails.setIsAccountNonExpired(user.getIsAccountNonExpired());
