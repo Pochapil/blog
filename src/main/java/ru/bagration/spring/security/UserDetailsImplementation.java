@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 public class UserDetailsImplementation implements UserDetails {
@@ -18,7 +19,7 @@ public class UserDetailsImplementation implements UserDetails {
     private Boolean isCredentialsNonExpired;
     private Boolean isEnabled;
 
-    private List<SimpleGrantedAuthority> simpleGrantedAuthorities;
+    private Set<SimpleGrantedAuthority> simpleGrantedAuthorities;
 
 
     @Override

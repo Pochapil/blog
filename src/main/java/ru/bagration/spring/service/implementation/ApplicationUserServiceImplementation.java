@@ -12,6 +12,7 @@ import ru.bagration.spring.security.UserDetailsImplementation;
 import ru.bagration.spring.service.ApplicationUserService;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +34,7 @@ public class ApplicationUserServiceImplementation implements ApplicationUserServ
         var user = userOptional.get();
 
         var userAuthorities = userAuthorityRepository.findAllByUserId(user.getId());
-        var grantedAuthorities = new ArrayList<SimpleGrantedAuthority>();
+        var grantedAuthorities = new HashSet<SimpleGrantedAuthority>();
         for (var userAuthority : userAuthorities) {
             var authorityOptional = authorityRepository.findById(userAuthority.getAuthorityId());
             if (authorityOptional.isPresent()) {

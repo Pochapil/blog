@@ -6,10 +6,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import ru.bagration.spring.dto.security.LoginRequest;
@@ -21,11 +25,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private final ApplicationUserService applicationUserService;
+    private final UserDetailsService applicationUserService;
+
+    public AuthenticationFilter(UserDetailsService applicationUserService, AuthenticationManager authenticationManager) {
+        super(authenticationManager);
+        this.applicationUserService = applicationUserService;
+    }
+
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -48,14 +59,16 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
                                             Authentication authentication) throws IOException {
 
-        String username = ((User) authentication.getPrincipal()).getUsername();
-        var userDetails = applicationUserService.loadUserByUsername(username);
+        var userDetails = (UserDetails) authentication.getPrincipal();
 
         String token = Jwts.builder().setIssuer("blog-service")
-                .claim("username", username)
-                .claim("authorities", userDetails.getAuthorities())
+                .claim("username", userDetails.getUsername())
+                .claim("authorities", userDetails.getAuthorities()
+                        .stream()
+                        .map(GrantedAuthority::getAuthority)
+                        .collect(Collectors.toList()))
                 .setExpiration(new Date(System.currentTimeMillis() + SecurityUtils.expiration))
-                .signWith(SignatureAlgorithm.ES512, SecurityUtils.secretKey)
+                .signWith(SignatureAlgorithm.HS512, SecurityUtils.secretKey)
                 .compact();
 
         var map = new HashMap<String, String>();
