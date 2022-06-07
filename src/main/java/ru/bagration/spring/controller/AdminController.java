@@ -12,7 +12,7 @@ import static ru.bagration.spring.utils.ResponseData.response;
 
 @RestController
 @RequestMapping("/admin")
-public class AdminControllerUser {
+public class AdminController {
 
     @GetMapping("/test")
     ResponseEntity<?> test() {
